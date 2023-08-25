@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.WebApp", "EFCore.WebApp\EFCore.WebApp.csproj", "{EF714CEC-3127-43A7-BD21-82536D3FBECD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.WebApp", "EFCore.WebApp\EFCore.WebApp.csproj", "{EF714CEC-3127-43A7-BD21-82536D3FBECD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Dominio", "EFCore.Dominio\EFCore.Dominio.csproj", "{B0FCEBBB-247C-4CC6-9A5D-8D0C8F8C3AE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCore.Repository", "EFCore.Repository\EFCore.Repository.csproj", "{EF9F9592-9E5D-4A84-A90D-3E708EF2B82F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{EF714CEC-3127-43A7-BD21-82536D3FBECD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF714CEC-3127-43A7-BD21-82536D3FBECD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF714CEC-3127-43A7-BD21-82536D3FBECD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0FCEBBB-247C-4CC6-9A5D-8D0C8F8C3AE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0FCEBBB-247C-4CC6-9A5D-8D0C8F8C3AE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0FCEBBB-247C-4CC6-9A5D-8D0C8F8C3AE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0FCEBBB-247C-4CC6-9A5D-8D0C8F8C3AE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9F9592-9E5D-4A84-A90D-3E708EF2B82F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9F9592-9E5D-4A84-A90D-3E708EF2B82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9F9592-9E5D-4A84-A90D-3E708EF2B82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9F9592-9E5D-4A84-A90D-3E708EF2B82F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

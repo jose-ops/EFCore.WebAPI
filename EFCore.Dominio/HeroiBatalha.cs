@@ -1,6 +1,6 @@
-﻿using EFCore.WebApp.Model;
+﻿
 
-namespace EFCore.WebApp.Data
+namespace EFCore.Dominio
 {
     public class HeroiBatalha
     {
