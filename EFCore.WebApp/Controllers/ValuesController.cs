@@ -1,3 +1,5 @@
+using EFCore.Dominio;
+using EFCore.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EFCore.WebApp.Controllers
@@ -6,11 +8,7 @@ namespace EFCore.WebApp.Controllers
     [Route("[controller]")]
     public class ValuesController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
+        
         private readonly ILogger<ValuesController> _logger;
 
         public ValuesController(ILogger<ValuesController> logger)
@@ -18,16 +16,22 @@ namespace EFCore.WebApp.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "Values")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet]
+        public ActionResult<IEnumerable<string>> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            return new string[] { "value1", "value2" };
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult Get(int id)
+        {
+            var heroi = new Heroi { Nome = "Homo de Ferra"};
+            using (var contexto = new HeroiContext())
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                contexto.Herois.Add(heroi);
+                contexto.SaveChanges();
+            }
+            return Ok();
         }
     }
 }
