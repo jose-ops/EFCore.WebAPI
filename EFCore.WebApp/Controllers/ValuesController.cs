@@ -8,29 +8,31 @@ namespace EFCore.WebApp.Controllers
     [Route("[controller]")]
     public class ValuesController : ControllerBase
     {
-        
+        public readonly HeroiContext _context;
+        public ValuesController(HeroiContext context)
+        {
+            _context = context;
+        }
         private readonly ILogger<ValuesController> _logger;
 
-        public ValuesController(ILogger<ValuesController> logger)
-        {
-            _logger = logger;
-        }
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            //var listHerois = _context.Herois.ToList();
+            var listHerois = (from heroi in _context.Herois 
+                              select heroi).ToList();
+            return Ok(listHerois);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        //GET api/values/5
+        [HttpGet("{nameHero}")]
+        public ActionResult Get(string nameHero)
         {
-            var heroi = new Heroi { Nome = "Homo de Ferra"};
-            using (var contexto = new HeroiContext())
-            {
-                contexto.Herois.Add(heroi);
-                contexto.SaveChanges();
-            }
+            var heroi = new Heroi { Nome = nameHero };
+
+            _context.Herois.Add(heroi);
+            _context.SaveChanges();
             return Ok();
         }
     }
