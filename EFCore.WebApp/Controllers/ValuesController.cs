@@ -16,24 +16,62 @@ namespace EFCore.WebApp.Controllers
         private readonly ILogger<ValuesController> _logger;
 
 
-        [HttpGet]
-        public ActionResult Get()
+        [HttpGet("filtro/{nome}")]
+        public ActionResult GetFiltro(string nome)
         {
-            //var listHerois = _context.Herois.ToList();
-            var listHerois = (from heroi in _context.Herois 
-                              select heroi).ToList();
+            var listHerois = _context.Herois
+                .Where(h => h.Nome.Contains(nome))
+                .ToList();
+
+            //var listHerois = (from heroi in _context.Herois
+            //                  where heroi.Nome.Contains(nome)
+            //                  select heroi).ToList();     //faz mesma coisa mas diferentemente da de cima 
             return Ok(listHerois);
         }
 
         //GET api/values/5
-        [HttpGet("{nameHero}")]
+        [HttpGet("Atualizar/{nameHero}")]
         public ActionResult Get(string nameHero)
         {
-            var heroi = new Heroi { Nome = nameHero };
+            //var heroi = new Heroi { Nome = nameHero };
 
-            _context.Herois.Add(heroi);
+            var heroi = _context.Herois
+                .Where(h => h.Id == 1)
+                .FirstOrDefault();
+            heroi.Nome = "Homem De Ferro";
+            //_context.Herois.Add(heroi);
             _context.SaveChanges();
+
             return Ok();
+        }
+
+        [HttpGet("AddRange")]
+        public ActionResult GetAddRange()
+        {
+            //var heroi = new Heroi { Nome = nameHero };
+
+            _context.AddRange(
+                new Heroi { Nome = "Capitap America"},
+                new Heroi { Nome = "Doutor Estranho" },
+                new Heroi { Nome = "Pantera Negra" },
+                new Heroi { Nome = "Viuva Negra" },
+                new Heroi { Nome = "Hulk" },
+                new Heroi { Nome = "Gaviao Arqueiro" },
+                new Heroi { Nome = "Capita Marvel" }
+                );
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            var heroi = _context.Herois
+                                .Where(x => x.Id == id)
+                                .Single();
+            _context.Herois.Remove(heroi);
+            _context.SaveChanges();
         }
     }
 }
