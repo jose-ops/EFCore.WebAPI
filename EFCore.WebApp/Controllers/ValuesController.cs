@@ -1,6 +1,7 @@
 using EFCore.Dominio;
 using EFCore.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore.WebApp.Controllers
 {
@@ -20,8 +21,11 @@ namespace EFCore.WebApp.Controllers
         public ActionResult GetFiltro(string nome)
         {
             var listHerois = _context.Herois
-                .Where(h => h.Nome.Contains(nome))
-                .ToList();
+                .Where(h => EF.Functions.Like(h.Nome, $"%{nome}%"))
+                .OrderByDescending(h => h.Id)
+                 .FirstOrDefault();//primeiro ou o deafult
+                 //.SingleOrDefault();//se tiver dois ou maias igual levanta Exception
+                 //.LastOrDefault();// ultimo da lista 
 
             //var listHerois = (from heroi in _context.Herois
             //                  where heroi.Nome.Contains(nome)
