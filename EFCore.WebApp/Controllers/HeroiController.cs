@@ -16,13 +16,13 @@ namespace EFCore.WebApp.Controllers
         {
             _context = context;
         }
-        // GET: api/<ValuesController1>
+        // GET: api/Heroi
         [HttpGet]
         public ActionResult Get()
         {
             try
             {
-                return Ok();
+                return Ok(new Heroi());
             }
             catch (Exception ex)
             {
@@ -33,7 +33,7 @@ namespace EFCore.WebApp.Controllers
         }
 
         // GET api/<ValuesController1>/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "Get")]
         public ActionResult Get(int id)
         {
             return Ok("value");
@@ -41,21 +41,11 @@ namespace EFCore.WebApp.Controllers
 
         // POST api/<ValuesController1>
         [HttpPost]
-        public ActionResult Post()
+        public ActionResult Post(Heroi model)
         {
             try
             {
-                var heroi = new Heroi//relacionamemteo 1 pra muitos
-                {
-                    Nome = "Homem de Ferro",
-                    Armas = new List<Arma>
-                    {
-                        new Arma{ Nome = "MAC 3" },
-                        new Arma{ Nome = "MAC 5"},
-                    }
-                };
-
-                _context.Herois.Add(heroi);
+                _context.Herois.Add(model);
                 _context.SaveChanges();
 
                 return Ok("BAZINGA");
@@ -69,17 +59,17 @@ namespace EFCore.WebApp.Controllers
 
         // PUT api/<ValuesController1>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id)
+        public ActionResult Put(int id) //insert dados relacionais
         {
             try
             {
                 var heroi = new Heroi
                 {
                     Id = id,
-                    Nome = "Homem De Ferro",
+                    Nome = "Homem de Ferro",
                     Armas = new List<Arma>
                     {
-                        new Arma{ Id = 1, Nome = "MARK IV" },
+                        new Arma{ Id = 1, Nome = "MARK Iv" },
                         new Arma{ Id = 2, Nome = "MARK VIII"},
                     }
                 };
